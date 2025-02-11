@@ -93,14 +93,15 @@ public class GSM {
         return CallHistory;
     }
 
-    public void delete(String numberPhone){
-        CallHistory.removeIf(call -> call.getNumberPhone().equals(numberPhone));
+    public void delete(Call callDelete){
+        CallHistory.removeIf(call -> call.equals(callDelete));
     }
 
     public void clearList(){
         CallHistory.clear();
     }
 
+    //tổng tiền cần trả mỗi phút
     public double sumTotalPrice(double price){
         int totalDuration = 0;
         for(Call call : CallHistory){
