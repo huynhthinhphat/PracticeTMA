@@ -1,6 +1,4 @@
-package org.example;
-
-import java.text.Format;
+package org.example.model;
 
 public class Worker extends Human{
     private double weekSalary;

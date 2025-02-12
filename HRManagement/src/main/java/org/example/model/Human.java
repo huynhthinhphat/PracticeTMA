@@ -1,6 +1,6 @@
-package org.example;
+package org.example.model;
 
-abstract class Human {
+public abstract class Human {
     private String firstName;
     private String lastName;
 

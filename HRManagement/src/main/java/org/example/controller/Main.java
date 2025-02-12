@@ -1,12 +1,17 @@
-package org.example;
+package org.example.controller;
+
+import org.example.model.Human;
+import org.example.model.Student;
+import org.example.model.Worker;
+import org.example.service.SorterService;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        //Tạo danh sách Student
         List<Student> listStudent = new ArrayList<>();
         Student student1 = new Student("Nguyen Van", "A", 1);
         Student student2 = new Student("Anh", "Pham", 4);
@@ -18,7 +23,6 @@ public class Main {
         Student student8 = new Student("Nhat", "Nam", 8);
         Student student9 = new Student("Huynh", "Phat", 2);
         Student student10 = new Student("Thinh", "Tai", 7);
-
         listStudent.add(student1);
         listStudent.add(student2);
         listStudent.add(student3);
@@ -30,13 +34,7 @@ public class Main {
         listStudent.add(student9);
         listStudent.add(student10);
 
-        listStudent.sort(Comparator.comparingInt(Student::getGrade));
-        for(Student student : listStudent){
-            System.out.println("First Name: " + student.getFirstName() + " - Last Name: " + student.getLastName() + " - Grade: " + student.getGrade());
-        }
-
-        System.out.println();
-
+        //Tạo danh sách Worker
         List<Worker> listWorker = new ArrayList<>();
         Worker worker1 = new Worker("Thinh", "Phat", 10, 5);
         Worker worker2 = new Worker("Thinh", "Tai", 7, 3);
@@ -48,7 +46,6 @@ public class Main {
         Worker worker8 = new Worker("Hong", "Ha", 8, 5);
         Worker worker9 = new Worker("Hong", "Hai", 3, 2);
         Worker worker10 = new Worker("Thinh", "Phat", 10, 1);
-
         listWorker.add(worker1);
         listWorker.add(worker2);
         listWorker.add(worker3);
@@ -60,20 +57,13 @@ public class Main {
         listWorker.add(worker9);
         listWorker.add(worker10);
 
-        listWorker.sort(Comparator.comparingDouble(Worker::moneyPerHour).reversed());
-        for(Worker worker : listWorker){
-            System.out.println("First Name: " + worker.getFirstName() + " - Last Name: " + worker.getLastName() + " - Money per hours: " + String.format("%.1f",worker.moneyPerHour()));
-        }
+        //Sắp xếp danh sách Student theo grade
+        SorterService.sortStudentByGrade(listStudent);
 
-        System.out.println();
+        //Sắp xếp danh sách Worker theo moneyPerHour
+        SorterService.sortWorkerByMoneyPerHour(listWorker);
 
-        List<Human> mergeList = new ArrayList<>();
-        mergeList.addAll(listStudent);
-        mergeList.addAll(listWorker);
-
-        mergeList.sort(Comparator.comparing(Human::getFirstName).thenComparing(Human::getLastName));
-        for(Object obj : mergeList){
-            System.out.println(obj);
-        }
+        //Hợp nhất 2 danh sách Student và Worker và sắp xếp theo FirstName, LastName
+        SorterService.mergeAndSortByName(listStudent, listWorker);
     }
 }

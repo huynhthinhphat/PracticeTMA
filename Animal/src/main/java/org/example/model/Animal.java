@@ -1,6 +1,6 @@
-package org.example;
+package org.example.model;
 
-abstract class Animal implements Sound{
+public abstract class Animal implements Sound{
     private int age;
     private String name;
     private String sex;
@@ -36,14 +36,5 @@ abstract class Animal implements Sound{
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public static double sumAverageAge(Animal[] animals){
-        int totalAge = 0;
-        for(int i = 0; i < animals.length; i++){
-            totalAge += animals[i].getAge();
-        }
-
-        return (double) totalAge / animals.length;
     }
 }

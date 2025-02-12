@@ -1,4 +1,6 @@
-package org.example;
+package org.example.model;
+
+import org.example.service.GSMService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,31 +85,28 @@ public class GSM {
         return "Model: " + model + " - Manufacturer: " + manufacturer + " - Price: " + price + " - Owner: " + owner + " - Battery: " + battery + " - Display: " + display;
     }
 
+    //Tạo danh sách CallHistory
     public void addList(List<Call> listCall){
-        if(CallHistory == null){
-            CallHistory = new ArrayList<>(listCall);
-        }
+        GSMService.addList(listCall);
     }
 
+    //Lấy danh sách CallHistory
     public List<Call> getList(){
-        return CallHistory;
+        return GSMService.getList();
     }
 
-    public void delete(Call callDelete){
-        CallHistory.removeIf(call -> call.equals(callDelete));
+    //Xóa một đối tượng Call trong danh sách CallHistory
+    public void delete(){
+        GSMService.delete();
     }
 
-    public void clearList(){
-        CallHistory.clear();
+    //Làm sạch danh sách CallHistory
+    public void clear(){
+        GSMService.clear();
     }
 
-    //tổng tiền cần trả mỗi phút
+    //Tính tổng tiền cần trả sau mỗi phút gọi
     public double sumTotalPrice(double price){
-        int totalDuration = 0;
-        for(Call call : CallHistory){
-            totalDuration += call.getDuration()/60;
-        }
-
-        return (double) totalDuration * price;
+        return GSMService.sumTotalPrice(price);
     }
 }
